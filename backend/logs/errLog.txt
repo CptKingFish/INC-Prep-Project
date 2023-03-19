@@ -1,0 +1,14 @@
+20211221	16:22:16	be44f274-712b-4ed9-ac7e-e2d42374324a	Error: Not allowed by CORS
+20211221	16:22:53	22206f99-6736-45e5-b517-8d9e7696175e	Error: Not allowed by CORS
+20230312	23:40:57	72957b67-33cd-4741-88d1-c0568aac8e5e	Error: Not allowed by CORS
+20230312	23:42:09	5f1b2650-4b51-4cbf-bbf7-acf576564198	Error: Not allowed by CORS
+20230312	23:42:15	d0556d9d-3aba-4a3a-b3a0-637f47ab4c58	Error: Not allowed by CORS
+20230312	23:42:21	164f3119-a646-48c3-9156-7f6283370d09	Error: Not allowed by CORS
+20230313	16:58:43	0a8cebea-8ec0-4602-80ac-977db54edc6d	Error: Access denied for user 'admin'@'localhost' (using password: YES)
+20230313	16:59:34	f048c552-a28a-4f42-b422-e8385ae8bc56	Error: Access denied for user 'admin'@'localhost' (using password: YES)
+20230313	16:59:45	37246e31-9e25-4d6e-9377-2a1f0672c2d9	InternalError: An error has occurred in the application.
+20230313	17:01:46	7dc13c2f-b6b7-42f9-a2e8-239fcb001238	InternalError: An error has occurred in the application.
+20230313	17:02:14	ad7795f1-da25-4fbd-82b7-29b5242e01b8	InternalError: An error has occurred in the application.
+20230313	17:02:53	242d543c-f5c7-4c73-af56-ece3faa8f9c4	InternalError: An error has occurred in the application.
+20230313	17:03:38	0bb080ea-be02-4e73-bf61-f2c0e1182ba9	InternalError: An error has occurred in the application.
+20230313	17:27:37	96aac332-bcf9-4381-bee0-8eb640184643	Error: cookieParser("secret") required for signed cookies
