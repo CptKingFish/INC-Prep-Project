@@ -11,6 +11,11 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+
 import useCheckLogin from "../hooks/useCheckLogin";
 
 const Navbar = ({ children }) => {
@@ -48,26 +53,43 @@ const Navbar = ({ children }) => {
 
   return (
     <div>
-      <Toolbar sx={{ flexWrap: "wrap" }}>
-        <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-          <Link
-            variant="button"
-            color="text.primary"
+      <AppBar position="static">
+        <Toolbar sx={{ flexWrap: "wrap" }}>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
             onClick={() => navigate("/")}
-            sx={{ my: 1, mx: 1.5 }}
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+              flexGrow: 1,
+              cursor: "pointer",
+            }}
           >
-            Company name
-          </Link>
-        </Typography>
-        <nav>
-          <Link
-            variant="button"
-            color="text.primary"
+            LOGO
+          </Typography>
+
+          <Typography
+            noWrap
+            component="a"
             onClick={() => navigate("/management")}
-            sx={{ my: 1, mx: 1.5 }}
+            sx={{
+              color: "inherit",
+              textDecoration: "none",
+              cursor: "pointer",
+              my: 1,
+              mx: 1.5,
+            }}
           >
-            Features
-          </Link>
+            Admin
+          </Typography>
+
           <Link
             variant="button"
             color="text.primary"
@@ -84,22 +106,24 @@ const Navbar = ({ children }) => {
           >
             Support
           </Link>
-        </nav>
-        {!auth.isAuthenticated ? (
-          <Button onClick={() => navigate("/login")} sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button>
-        ) : (
-          <Button
-            onClick={logout}
-            variant="outlined"
-            color="error"
-            sx={{ my: 1, mx: 1.5 }}
-          >
-            Logout
-          </Button>
-        )}
-      </Toolbar>
+
+          {!auth.isAuthenticated ? (
+            <Button onClick={() => navigate("/login")} sx={{ my: 1, mx: 1.5 }}>
+              Login
+            </Button>
+          ) : (
+            <Button
+              onClick={logout}
+              variant="outlined"
+              color="error"
+              sx={{ my: 1, mx: 1.5 }}
+            >
+              Logout
+            </Button>
+          )}
+        </Toolbar>
+      </AppBar>
+
       <div>{children}</div>
     </div>
   );

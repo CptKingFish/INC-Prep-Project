@@ -158,6 +158,7 @@ exports.processLogin = async (req, res, next) => {
       // End of passowrd comparison with the retrieved decoded password.
     }
   } catch (error) {
+    console.log("Error inside processLogin: ", error);
     return next(error);
   }
 }; // End of processLogin
