@@ -3,7 +3,15 @@ import { DataGrid } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Box, Button } from "@mui/material";
+import {
+  Box,
+  Button,
+  Modal,
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+} from "@mui/material";
 
 const rows = [
   {
@@ -101,10 +109,12 @@ const columns = [
 ];
 
 const Management = () => {
-  const [state, setState] = useState({
-    users: [],
-    loading: true,
-  });
+  // const [state, setState] = useState({
+  //   users: [],
+  //   loading: true,
+  // });
+  const [openModal, setOpenModal] = useState(false);
+  const [role, setRole] = useState("Student");
 
   return (
     <Box
@@ -125,11 +135,112 @@ const Management = () => {
           sx={{
             mb: 2,
           }}
+          onClick={() => setOpenModal(true)}
         >
           Add User
         </Button>
         <DataGrid rows={rows} columns={columns} />
       </div>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 600,
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                mb: 2,
+                fontWeight: "bold",
+              }}
+              id="modal-modal-title"
+              variant="h5"
+            >
+              Add new user
+            </Typography>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                mb: 2,
+              }}
+            >
+              <TextField
+                sx={{
+                  mr: 1,
+                  width: "100%",
+                }}
+                required
+                id="outlined-required"
+                label="Required"
+              />
+              <TextField
+                sx={{
+                  width: "100%",
+                }}
+                required
+                id="outlined-required"
+                label="Required"
+              />
+            </Box>
+
+            <TextField
+              sx={{
+                width: "100%",
+                mb: 2,
+              }}
+              required
+              id="outlined-required"
+              label="Required"
+            />
+            <Select
+              sx={{
+                width: "100%",
+              }}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={role}
+              label="Role"
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <MenuItem value={"Admin"}>Admin</MenuItem>
+              <MenuItem value={"Officer"}>Officer</MenuItem>
+              <MenuItem value={"Student"}>Student</MenuItem>
+            </Select>
+            <Button
+              sx={{
+                mt: 5,
+              }}
+              variant="contained"
+            >
+              Add User
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </Box>
   );
 };
