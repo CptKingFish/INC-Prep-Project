@@ -45,6 +45,7 @@ export default function Register() {
       last_name: lastName,
       email: email,
       password: password,
+      verification_status: "verified",
     };
 
     try {

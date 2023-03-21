@@ -12,3 +12,21 @@
 20230313	17:02:53	242d543c-f5c7-4c73-af56-ece3faa8f9c4	InternalError: An error has occurred in the application.
 20230313	17:03:38	0bb080ea-be02-4e73-bf61-f2c0e1182ba9	InternalError: An error has occurred in the application.
 20230313	17:27:37	96aac332-bcf9-4381-bee0-8eb640184643	Error: cookieParser("secret") required for signed cookies
+20230321	22:01:20	049cb7d9-9334-43bb-83c1-38e9ee28ea34	ReferenceError: util is not defined
+20230321	22:13:08	7ec37959-618e-48d3-81cb-feda662ffc31	ReferenceError: util is not defined
+20230321	22:14:55	34c37c69-0c4d-4fcd-9941-9b9009eefbb7	InternalError: An error has occurred in the application.
+20230321	23:00:03	f8c298b9-b766-4dfe-b105-dcf5bfa7a672	ReferenceError: pool is not defined
+20230321	23:01:19	d737a949-92e9-4a49-9bfd-0d41abf9d831	DataError: Invalid input(s)
+20230321	23:06:01	40a6b597-8d3d-4f09-a84f-97b192a68834	DataError: Invalid input(s)
+20230322	00:02:23	6b56e38c-6b26-44a9-9bb8-e88061ef63d5	ReferenceError: E is not defined
+20230322	00:03:39	297ac8b0-1e64-4775-84c5-8a58a4d45ecf	InternalError: An error has occurred in the application.
+20230322	00:26:24	3cd67f5f-9ab3-443a-935f-720654da1a1a	InternalError: An error has occurred in the application.
+20230322	00:27:17	771b1309-e662-4b9a-aa28-27a08dd11058	InternalError: An error has occurred in the application.
+20230322	00:27:42	219debd9-3074-4f60-8d64-00e722b2ce8c	InternalError: An error has occurred in the application.
+20230322	00:28:39	1325b43b-97af-466c-b56d-9918c6db18af	InternalError: An error has occurred in the application.
+20230322	00:29:13	9570af32-9dda-46f2-9ec3-9a45e874e3d2	InternalError: An error has occurred in the application.
+20230322	00:30:04	e6067f52-3ce0-47e3-a389-c9594e847041	InternalError: An error has occurred in the application.
+20230322	00:30:32	5685db44-97ed-4328-8741-246ff522c1e6	InternalError: An error has occurred in the application.
+20230322	00:30:59	3b45fc31-dc10-4bec-baa5-8e0eb81ffe57	InternalError: An error has occurred in the application.
+20230322	00:31:50	a36ae72c-d6b4-4cc6-b86c-d85836644edf	InternalError: An error has occurred in the application.
+20230322	01:46:13	8cad4dc0-7558-470b-9e26-4fa85e87d4fd	InternalError: An error has occurred in the application.

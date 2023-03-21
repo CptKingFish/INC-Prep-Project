@@ -7,7 +7,8 @@ const config = require("./config/config");
 const corsOptions = require("./config/corsOptions");
 const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
-const verifyJWT = require("./middleware/verifyJWT");
+// const verifyJWT = require("./middleware/verifyJWT");
+const verifyJWT = require("./middleware/verifyAccessTokens").verifyToken;
 const cookieParser = require("cookie-parser");
 const credentials = require("./middleware/credentials");
 const PORT = process.env.PORT || 3500;
@@ -46,6 +47,7 @@ app.use("/refresh", require("./routes/refresh"));
 app.use("/logout", require("./routes/logout"));
 
 app.use(verifyJWT);
+app.use("/admin", require("./routes/api/admin"));
 // app.use("/employees", require("./routes/api/employees"));
 // app.use("/users", require("./routes/api/users"));
 

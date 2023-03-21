@@ -7,7 +7,8 @@ exports.processRegister = async (req, res, next) => {
   console.log("processRegister running.");
 
   // Get register data
-  const { first_name, last_name, email, password } = req.body;
+  const { first_name, last_name, email, password, verification_status } =
+    req.body;
   let errors = [];
 
   // Validation
@@ -15,7 +16,8 @@ exports.processRegister = async (req, res, next) => {
     first_name === "" ||
     last_name === "" ||
     email === "" ||
-    password === ""
+    password === "" ||
+    verification_status === ""
   ) {
     // Check for empty inputs
     errors = [
@@ -24,6 +26,22 @@ exports.processRegister = async (req, res, next) => {
         parameter: "Input fields",
         value: "Empty input fields",
         message: "All input fields is required to be filled.",
+      }),
+    ];
+  }
+
+  if (
+    verification_status !== "email not sent" &&
+    verification_status !== "email sent" &&
+    verification_status !== "verified"
+  ) {
+    // Check for invalid verification status
+    errors = [
+      ...errors,
+      new E.ParameterError({
+        parameter: "Verification status",
+        value: verification_status,
+        message: "Verification status is invalid.",
       }),
     ];
   }
@@ -49,7 +67,8 @@ exports.processRegister = async (req, res, next) => {
             first_name,
             last_name,
             email,
-            hash
+            hash,
+            verification_status
           );
           if (results.affectedRows === 1) {
             console.log(results);

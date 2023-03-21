@@ -12,6 +12,7 @@ module.exports = {
   JWTRefreshTokenKey: process.env.JWT_REFRESH_TOKEN_KEY,
   cryptr_secret: process.env.CRYPTR_SECRET,
   cookie_secret: process.env.COOKIE_SECRET,
+  sib_api_key: process.env.SIB_API_KEY,
   //   access_token_secret: process.env.COOKIE_SECRET,
   //   refresh: process.env.CRYPTR_SECRET,
   //   mailtrapUserName: process.env.MAILTRAP_USERNAME,

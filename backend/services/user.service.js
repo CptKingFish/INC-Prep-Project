@@ -6,7 +6,8 @@ module.exports.register = async function (
   first_name,
   last_name,
   email,
-  password
+  password,
+  verification_status
 ) {
   console.log("\nregister method is called.");
 
@@ -19,7 +20,7 @@ module.exports.register = async function (
 
   try {
     const userDataQuery =
-      "INSERT INTO security_case_1_db.users (first_name, last_name, email, password, role_id, course_id, admission_id) VALUES (?,?,?,?,?,?,?);";
+      "INSERT INTO security_case_1_db.users (first_name, last_name, email, password, role_id, course_id, admission_id, verification_status) VALUES (?,?,?,?,?,?,?,?);";
     const results = await connection.query(userDataQuery, [
       first_name,
       last_name,
@@ -28,6 +29,7 @@ module.exports.register = async function (
       2,
       1,
       "NA",
+      verification_status,
     ]);
     return results[0];
   } catch (error) {

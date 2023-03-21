@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
@@ -11,34 +11,9 @@ import {
   TextField,
   Select,
   MenuItem,
+  FormControl,
 } from "@mui/material";
-
-const rows = [
-  {
-    id: 1,
-    firstname: "Hello",
-    lastname: "World",
-    email: "hello@gmail.com",
-    role: "Student",
-    status: "Sent",
-  },
-  {
-    id: 2,
-    firstname: "Hello",
-    lastname: "World",
-    email: "hello@gmail.com",
-    role: "Student",
-    status: "Sent",
-  },
-  {
-    id: 3,
-    firstname: "Hello",
-    lastname: "World",
-    email: "hello@gmail.com",
-    role: "Student",
-    status: "Sent",
-  },
-];
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const columns = [
   { field: "email", headerName: "E-mail", width: 350 },
@@ -108,13 +83,93 @@ const columns = [
   },
 ];
 
+const defaultRows = [
+  {
+    id: 1,
+    firstname: "Hello",
+    lastname: "World",
+    email: "hello@gmail.com",
+    role: "Student",
+    status: "Sent",
+  },
+  {
+    id: 2,
+    firstname: "Hello",
+    lastname: "World",
+    email: "hello@gmail.com",
+    role: "Student",
+    status: "Sent",
+  },
+  {
+    id: 3,
+    firstname: "Hello",
+    lastname: "World",
+    email: "hello@gmail.com",
+    role: "Student",
+    status: "Sent",
+  },
+];
+
 const Management = () => {
-  // const [state, setState] = useState({
-  //   users: [],
-  //   loading: true,
-  // });
+  const axiosPrivate = useAxiosPrivate();
   const [openModal, setOpenModal] = useState(false);
   const [role, setRole] = useState("Student");
+  const [rows, setRows] = useState(defaultRows);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleAddUser = async (e) => {
+    e.preventDefault();
+    if (firstName === "" || lastName === "" || email === "") {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    if (!new RegExp(/^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/).test(email)) {
+      alert("Please enter a valid email");
+      return;
+    }
+
+    try {
+      const response = await axiosPrivate.post(
+        "http://localhost:3500/admin/adduser",
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      const { data, status } = response;
+      // let verification_status = "email sent";
+      // if (!data.ok) {
+      //   alert("Something went wrong. Please try again later");
+      //   verification_status = "email not sent";
+      // }
+
+      console.log("res is here__________________________", response);
+    } catch (error) {
+      console.error(error);
+    }
+
+    const newRows = [
+      ...rows,
+      {
+        id: rows.length + 1,
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        role: role,
+        status: "Sent",
+      },
+    ];
+    setRows(newRows);
+    setOpenModal(false);
+  };
 
   return (
     <Box
@@ -160,85 +215,94 @@ const Management = () => {
             p: 4,
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              sx={{
-                mb: 2,
-                fontWeight: "bold",
-              }}
-              id="modal-modal-title"
-              variant="h5"
-            >
-              Add new user
-            </Typography>
+          <form>
             <Box
               sx={{
-                width: "100%",
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                mb: 2,
               }}
             >
+              <Typography
+                sx={{
+                  mb: 2,
+                  fontWeight: "bold",
+                }}
+                id="modal-modal-title"
+                variant="h5"
+              >
+                Add new user
+              </Typography>
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  mb: 2,
+                }}
+              >
+                <TextField
+                  sx={{
+                    mr: 1,
+                    width: "100%",
+                  }}
+                  required
+                  id="outlined-required"
+                  label="First name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+                <TextField
+                  sx={{
+                    width: "100%",
+                  }}
+                  required
+                  id="outlined-required"
+                  label="Last name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </Box>
               <TextField
                 sx={{
-                  mr: 1,
                   width: "100%",
+                  mb: 2,
                 }}
                 required
                 id="outlined-required"
-                label="Required"
+                label="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <TextField
+              <Select
                 sx={{
                   width: "100%",
                 }}
-                required
-                id="outlined-required"
-                label="Required"
-              />
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={role}
+                label="Role"
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <MenuItem value={"Admin"}>Admin</MenuItem>
+                <MenuItem value={"Officer"}>Officer</MenuItem>
+                <MenuItem value={"Student"}>Student</MenuItem>
+              </Select>
+              <Button
+                type="submit"
+                sx={{
+                  mt: 5,
+                }}
+                variant="contained"
+                onClick={handleAddUser}
+              >
+                Add User
+              </Button>
             </Box>
-
-            <TextField
-              sx={{
-                width: "100%",
-                mb: 2,
-              }}
-              required
-              id="outlined-required"
-              label="Required"
-            />
-            <Select
-              sx={{
-                width: "100%",
-              }}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={role}
-              label="Role"
-              onChange={(e) => setRole(e.target.value)}
-            >
-              <MenuItem value={"Admin"}>Admin</MenuItem>
-              <MenuItem value={"Officer"}>Officer</MenuItem>
-              <MenuItem value={"Student"}>Student</MenuItem>
-            </Select>
-            <Button
-              sx={{
-                mt: 5,
-              }}
-              variant="contained"
-            >
-              Add User
-            </Button>
-          </Box>
+          </form>
         </Box>
       </Modal>
     </Box>
